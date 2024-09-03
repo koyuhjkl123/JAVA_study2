@@ -2,10 +2,10 @@
 
 회사 일 경험 3개월 인턴 학습 일지
 
-# 2일차
-간단한 회원가입 만들기 과제
+# 2일 ~ 4일차
+첫번째 간단한 JSP, Javascript을 활용한 회원가입 만들기 과제
 <br>
-JSP, Javascript을 활용한 회원가입
+두번째 Jquery, javascript 활용한 체크박스
 
 
 ## 과제 회원가입조건
@@ -290,6 +290,172 @@ function isValidJumin(jumin) {
 }
 ```
 </details>
+
+<br>
+<br>
+
+## 과제 체크박스 조건
+1. 전체 체크박스 클릭 시 9개의 항목 체크 <br>
+- 체크된 9개의 항목중 1개라도 선택 해제 시 전체 체크 해제
+- 전체 체크 다시 체크 시 해재된 항목 체크
+2. 항목 체크 한 순서대로 아래에  항목 이름 표시 <br>
+예) 부산 서울 경기 울산 <br>
+- 체크된 항목 해제 시 아래에 내용 삭제 <br>
+예) 부산 서울 경기 울산 || 부산 항목 체크 해제 시 -> 서울 경기 울산 <br>
+3. 버튼 클릭 시 3가지 조건 달성
+  0개 혹은 4개 이하 체크 된 경우
+  전체 항목 체크 된 경우
+  그 외 false
+
+## 과제 코딩
+
+check.jsp
+<br>
+
+<details>
+    <summary>코드 보기(Service)</summary>
+	
+```jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script defer type="text/javascript" src=/js/check.js></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<title>체크박스 과제</title>
+</head>
+<body>
+
+
+<div class="box">
+	<input type="checkbox" name="all" id="all">전체</input>
+	<input type="button" value="버튼" id="btn" name="btn">
+	<br>
+	<input type="checkbox" name="se" class="aa" value="서울">서울</input>
+	<input type="checkbox" name="in" class="aa" value="인천">인천</input>
+	<input type="checkbox" name="gy" class="aa" value="경기">경기</input>
+	<input type="checkbox" name="ga" class="aa" value="강원">강원</input>
+	<input type="checkbox" name="bu" class="aa" value="부산">부산</input>
+	<input type="checkbox" name="da" class="aa" value="대전">대전</input>
+	<input type="checkbox" name="je" class="aa" value="전남">전남</input>
+	<input type="checkbox" name="je" class="aa" value="제주">제주</input>
+	<input type="checkbox" name="py" class="aa" value="평양">평양</input>
+
+</div>
+<div class="text"></div>
+
+</body>
+</html>
+
+
+```
+</details>
+
+<br>
+<br>
+
+check.js
+<br>
+
+<details>
+    <summary>코드 보기(Service)</summary>
+	
+```javascript
+
+$(function(){
+	// 전체 체크박스가 클릭
+	$('#all').click(function (){
+		checkedAll();
+	});
+	
+	// 버튼 클릭 했을 때
+	$('#btn').click(function(){
+		checkButton();
+	});
+	// 항목 체크 여부
+	$('.aa').click(function(){
+		checkedFun();
+		
+		let checkValue = $(this).val();
+	    
+	    if($(this).is(":checked")){
+	    	$('.text').append('<span>'+ checkValue +'</span>');
+	        }else{
+	        	// 해제 시
+	        	 $('.text').find('span').each(function() {
+	                 if ($(this).text() === checkValue) {
+	                     $(this).remove();
+	                     return false;
+	                 }
+	             });
+	        }
+	});
+	
+});
+
+function checkedAll(){
+	let checked = $("input[name=all]").is(':checked');
+	let checkValue = $("input[class=aa]").val();
+	let checks = $('input:checkbox[class=aa]:not(:checked)');
+	
+	if(checked){
+		// 클릭이 되었다면
+		$(".aa").prop("checked", true);
+		
+			
+		$.each(checks, function(index,item){
+			$('.text').append('<span>'+ $(item).val() +'</span>');
+		});
+		
+	}else{
+		$(".aa").prop("checked", false);
+        $('span').remove();
+	}
+}
+
+function checkButton(){
+	// 1개도 선택 안됬을 때
+	let checked = $("input[name=all]").is(':checked');
+	
+	// 체크박스 체크한 개수 구하기
+	let checks = $('input:checkbox[class=aa]:checked').length;
+	
+	if(checks == 0){
+		alert("최소 1개 이상 선택 하세요");
+	}else if(checked){
+		alert("전체를 클릭 하셨습니다!");
+	}else if(checks <= 4){
+		alert("4개 이하를 선택 하셨습니다");
+	}else{
+		alert("5개 이상 혹은 그 외 선택");
+	}
+}
+
+
+function checkedFun(){
+	// 전체 체크
+    let checkAll = $("input[name=all]");
+    // 체크 항목
+    let checkaa = $("input[class=aa]");
+    // 항목중에 체크된
+    let checkedaa = $("input[class=aa]:checked");
+    // 항목 값
+   
+    if(checkaa.length != checkedaa.length){
+    	// 체크안한 항목이 있다면 전체 체크 해제
+    	$("#all").prop('checked', false);
+    }else{
+    	// 모두 체크 시 전체 항목 체크
+    	$("#all").prop('checked', true);
+    }
+ 
+}
+```
+</details>
+
 
 ## 느낀점
 오래간만에(?) JSP, javascript 사용해 보았는데 뭔가 생소한? 느낌이었고 <br>

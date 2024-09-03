@@ -29,7 +29,7 @@ pw : 비밀번호확인(가입신청버튼 클릭시)
 index.JSP
 
 <details>
-    <summary>코드 보기(Service)</summary>
+    <summary>코드 보기</summary>
 	
 ```jsp
 
@@ -129,7 +129,7 @@ reply.js
 <br>
 
 <details>
-    <summary>코드 보기(Service)</summary>
+    <summary>코드 보기</summary>
 	
 ```javascript
 
@@ -313,7 +313,7 @@ check.jsp
 <br>
 
 <details>
-    <summary>코드 보기(Service)</summary>
+    <summary>코드 보기</summary>
 	
 ```jsp
 
@@ -361,7 +361,7 @@ check.js
 <br>
 
 <details>
-    <summary>코드 보기(Service)</summary>
+    <summary>코드 보기</summary>
 	
 ```javascript
 

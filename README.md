@@ -290,3 +290,8 @@ function isValidJumin(jumin) {
 }
 ```
 </details>
+
+## 느낀점
+오래간만에(?) JSP, javascript 사용해 보았는데 뭔가 생소한? 느낌이었고 <br>
+까먹은 태그나 사용법은 다시 구글링 치면서 익혔다 <br>
+간단한 미니프로젝트를 다양한 주제로 활용해 만들어야 겠다
